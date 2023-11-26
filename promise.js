@@ -40,22 +40,60 @@
 //     console.log(e);
 // });
 
-const isResolved = true;
-const promise = new Promise((resolve, reject) => {
-  if (isResolved) {
-    resolve("completed");
-  } else {
-    reject("rejected for promise");
-  }
+// const isResolved = true;
+// const promise = new Promise((resolve, reject) => {
+//   if (isResolved) {
+//     resolve("completed");
+//   } else {
+//     reject("rejected for promise");
+//   }
+// });
+
+// console.log(promise);
+
+// promise
+//   .catch((e) => {               //catch will catch errors
+//     console.log("rejected");
+//     console.log(e);
+//   })
+//   .then((result) => {           //then will catch resolve
+//     console.log(result);
+//   });
+
+
+// function wait (ms){
+//     const promise = new Promise((resolve) => {
+//         setTimeout(resolve, ms);
+//     });
+//     return promise;
+// }
+
+// wait(1000).then(() => {
+//     console.log('done in 1000ms');
+// });
+
+// wait(2000).then(() => {
+//     console.log('done in 2000ms');
+// });
+
+// wait(3000).then(() => {
+//     console.log('done in 3000ms');
+// });
+
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //promise
+
+wait(1000).then(() => {
+    console.log('done in 1000ms');
 });
 
-console.log(promise);
+wait(2000).then(() => {
+    console.log('done in 2000ms');
+}); 
 
-promise
-  .catch((e) => {               //catch will catch errors
-    console.log("rejected");
-    console.log(e);
-  })
-  .then((result) => {           //then will catch resolve
-    console.log(result);
-  });
+wait(3000).then(() => {
+    console.log('done in 3000ms');
+});
+
+
+
