@@ -60,7 +60,6 @@
 //     console.log(result);
 //   });
 
-
 // function wait (ms){
 //     const promise = new Promise((resolve) => {
 //         setTimeout(resolve, ms);
@@ -80,20 +79,44 @@
 //     console.log('done in 3000ms');
 // });
 
+// const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //promise
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); //promise
+// wait(1000).then(() => {
+//     console.log('done in 1000ms');
+// });
 
-wait(1000).then(() => {
-    console.log('done in 1000ms');
-});
+// wait(2000).then(() => {
+//     console.log('done in 2000ms');
+// });
 
-wait(2000).then(() => {
-    console.log('done in 2000ms');
-}); 
+// wait(3000).then(() => {
+//     console.log('done in 3000ms');
+// });
 
-wait(3000).then(() => {
-    console.log('done in 3000ms');
-});
+/**
+ * /users?username=[username]
+ * /posts?user_id=[user_id]
+ * /comments?post_id=[post_id]
+ * /users?username=[username]
+ */
 
+const get = (url) => Promise.resolve();
 
-
+get(`/users?username=Jahir`)
+  .then((user) => {
+    return get(`/posts?user_id=${user.id}`);
+  })
+  .then((post) => {
+    const latestPost = post[0];
+    return get(`/comments?post_id=${latestPost}`);
+  })
+  .then((comments) => {
+    const latestComments = comments[0];
+    return get(`/users?username=${latestComments.username}`);
+  })
+  .then((user) => {
+    console.log(user);
+  })
+  .catch(() => {
+    console.log("error");
+  });
